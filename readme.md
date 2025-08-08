@@ -1,1 +1,99 @@
-I want to work on Product Popularity Analysis Project. It's an end-to-end analytics engineering project. So, I'm going to have a script, right? Maybe a faker library that generates data every 3 hours and send it to MongoDB. So, I want it to look like a real-life thing. Like somebody is ordering from Amazon and stuff. So, it's going to be generating random data. Now, the random data that this thing is going to be generating, I don't want it to be data that already exists. And I don't want it to change products. So, which means that it's only going to be changing the orders and then also adding new customers and stuff like that. So, it's going to be generating new orders and then sending it to MongoDB. So, I'm going to have a script that extracts data from MongoDB and then stores it in a Postgres schema. Then, I'm going to now use dbt to create models that would help me to build a dashboard. The models that I will use to create a dashboard at the end of the day to help me to identify product popularities. So, what I'm looking at to use for the dashboard is light-dash from dbt. So, the metrics that I'm looking to answer, I really don't know. But off the top of my head, what I'm looking at is I have like a chart that has maybe has the year filter, the month filter. It has the category filter and then yeah, those are like and they may be like store, right? Maybe like store a few thousand. Then, the chart is going to be like maybe there is a text table that shows product name, the number of times that product have been ordered, the quantity, right? And then maybe, I don't know, maybe popularity rank. I don't know how to calculate popularity rank in that scenario, right? Now, then we can have like states so that maybe we have another dashboard that we can say product popularity by states. So, in that scenario, in that second dashboard, I'm really going to have the product category and then the product names. So, when I pick a product name, I can see like the performance of that product in terms of states wide. So, it can be like there is a map that is showing quantity ordered from a state and then on that same map, I'm seeing total sales from that state, right? I think Tableau would make more sense to, you know, kind of do the visualization. But the problem I'm having is that since I'm using the free Tableau, I can connect the free Tableau to my Postgres, right? But maybe what I'll do is I can download the paid Tableau and do Tableau trial, right, for it. So, yeah, let's work with Tableau, right? Let's work with Tableau. So, this is like my idea, right? So, help me to come up with a robust case study and tell me questions to answer. Now, based on the things I've mentioned now, help me also to come up with questions that I'm going to put on the dashboard, like when I'm doing my visualizations and stuff. And then, yeah, then because I'm using like, you know, free stuffs, I'm using, what is it called? I'm using Faker to generate the data, store it to MongoDB, then extract from MongoDB to Postgres, then use dbt to stay up my Postgres. And then connect that to Tableau and build my dashboard. But then I would also like, love to see a cloud version of it, where maybe I'm still using Faker to generate the scripts, to generate the data. But then instead of storing it locally, I'm sending it to S3 bucket. But it's being partitioned by date format, date time, right? Let's do date time, right? It's being partitioned by date time format. And then from there, I now load it into Snowflake using Snowflake external table or external stages to load it into my schema in Snowflake, then connect dbt to Snowflake and still do the same thing. So yeah, that's it.
+**Case Study Title:**
+📦 *Tracking Product Popularity in an E-commerce Platform*
+
+**Background:**
+Imagine you are the Analytics Engineer for a growing e-commerce marketplace, **ShopEase**, which operates in multiple states and offers thousands of products in various categories. The business wants to understand:
+
+* Which products are the most popular
+* How popularity changes over time
+* Which states and categories contribute most to sales
+* How seasonal trends affect product demand
+
+**Challenge:**
+You need to build a **real-time inspired analytics pipeline** that simulates order generation and answers business questions. The pipeline should:
+
+* Generate realistic but **non-repeating** orders using a fixed product catalog
+* Continuously add new customers and simulate orders every 3 hours
+* Store data in MongoDB (or in S3 for the cloud version)
+* Transform and model the data in Postgres/Snowflake using dbt
+* Deliver actionable insights through Tableau dashboards
+
+**Goal:**
+Empower business teams to make data-driven decisions on:
+
+* Inventory restocking
+* Marketing campaigns per product & state
+* Identifying underperforming categories
+
+---
+
+### **2. Data Model & Pipeline Flow**
+
+```
+Faker Script (Products, Customers, Orders)
+     ↓ every 3 hours
+MongoDB (Raw Orders)
+     ↓ ETL Script (Python)
+Postgres (Raw → Staging → Analytics Schema)
+     ↓
+dbt (Transformations & Metrics)
+     ↓
+Tableau (Dashboards)
+```
+
+---
+
+### **3. Dashboard Questions & Metrics**
+
+
+#### **Main Dashboard: Product Popularity Trends**
+
+1. **Top Products**
+
+   * Which products have been ordered the most in a given time period?
+   * Metric: `Order Count` & `Total Quantity Ordered`
+2. **Revenue Leaders**
+
+   * Which products generate the most revenue?
+   * Metric: `Total Sales = SUM(price * quantity)`
+3. **Popularity Rank**
+
+   * Show a rank column based on `Order Count` or `Total Sales`
+4. **Category Performance**
+
+   * Which categories dominate orders and sales?
+5. **Trends Over Time**
+
+   * Line chart of `Order Count` over time (day, month, year filter)
+
+**Filters for this dashboard:**
+
+* Year, Month, Product Category, Store/Branch
+
+---
+
+#### **Secondary Dashboard: Product Popularity by State**
+
+1. **State-Level Map**
+
+   * Quantity ordered per state
+   * Total sales per state
+2. **Product Drilldown**
+
+   * Select a product → see how it performs across states
+3. **Regional Popularity Rank**
+
+   * Which products are #1 in each state?
+
+**Filters for this dashboard:**
+
+* Year, Month, Product Category, Product Name
+
+---
+
+#### **Possible Extra Insights**
+
+* Repeat purchase rate per product
+* New vs returning customers per product
+* Seasonal product demand spikes
+* Price sensitivity (changes in order count when price changes in simulation using dbt snaposhot)
