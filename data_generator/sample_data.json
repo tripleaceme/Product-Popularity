@@ -1,0 +1,27 @@
+# Order Data
+{
+    "order_id": "6e3e40d4-6126-4967-bc1e-e337d27ced50",
+    "customer_id": "e0558128-bfed-43e6-a054-73abf635107b", 
+    "branch_id": "B7", 
+    "branch_name": "Branch 7", 
+    "state": "New York",
+    "order_date": datetime.datetime(2025, 8, 8, 23, 34, 53, 297654),
+    "items": [
+        {"product_id": "P010", "product_name": "Portable Hard Drive", 
+                "category": "Electronics", "selling_price": 89.99, "purchase_price": 60.0, "quantity": 1}, 
+        {"product_id": "P006", "product_name": "Desk Lamp", "category": "Home & Office", 
+                    "selling_price": 29.99, "purchase_price": 15.0, "quantity": 3}
+            ]
+}
+
+
+# Customer Data
+
+{
+    "customer_id": "64cb5ea6-50e9-42ad-af5e-d45126cbbf22",
+    "name": "Rachel Davis",
+    "email": "barrypeter@example.net", 
+    "phone": "001-507-843-9150x00806", 
+    "state": "Washington", 
+    "join_date": datetime.datetime(2025, 8, 8, 23, 33, 54, 978740)
+}
