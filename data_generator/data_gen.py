@@ -101,16 +101,11 @@ def generate_orders(n=50):
 
 
 
-# if __name__ == "__main__":
-#     # Generate customers
-#     # generate_customers()
+if __name__ == "__main__":
+    # Generate customers
+    generate_customers()
 
-#     # Generate orders
-#     generate_orders(1000)  # Adjust the number of orders as needed
-#     print("Data generation complete.")
-sn = 0
-for i in range(6):
-    sn += 1
-    print(f"{sn}: Generating starting")
+    # Generate orders
+    print("Generating orders...")
     generate_orders(1000)  # Adjust the number of orders as needed
     print("Data generation complete.")
